@@ -1,0 +1,54 @@
+  <header>
+    <a href="/">FitClick</a>
+
+    <nav>
+        <ul class="nav__links">
+            <li><a class="list-link" href='/'>Home</a></li>
+            <li><a class="list-link" href='services'>Services</a></li>
+            <!-- <li><a class="list-link" href="services.html#pricing">Pricing</a></li> -->
+            <li><a class="list-link" href='membership'>Membership</a></li>
+            <li><a class="list-link" href='contact'>Contact</a></li>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">Pages
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                      </svg>
+                </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a class="list-link" href='bmi'>BMI Calculator</a>
+                    <a class="list-link" href='timetable'>Timetable</a>
+                    <a class="list-link" href='services#pricing'>Pricing</a>
+                </div>
+            </div>
+
+        </ul>
+    </nav>
+    {{!-- {{ name }} --}}
+
+    {{#if !verifyUser }}
+    <a href="login" class="cta"><button class="btn-purple">Login</button></a>
+     {{/if}}
+    <!-- <a href="login.html" class="cta"><button class="btn-purple">Login</button></a> -->
+    <a onclick="openNav()" class="menu" href="#"><button class="menu-btn">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg></h1>
+        </button></a>
+</header>
+
+<div id="mobile__menu" class="overlay">
+    <a class="close" onclick="closeNav()">&times;</a>
+    <div class="overlay__content">
+        <a class="list-link" href="index">Home</a>
+        <a class="list-link" href="services">Services</a>
+        <a class="list-link" href="membership">Membership</a>
+        <a class="list-link" href="services#pricing">Pricing</a>
+        <a class="list-link" href="contact">Contact</a>
+        <a class="list-link" href="bmi">BMI Calculator</a>
+        <a class="list-link" href="timetable">Timetable</a>
+
+        <a href="login" class="cta"><button class="btn-purple">Login</button></a>
+    </div>
+</div>
