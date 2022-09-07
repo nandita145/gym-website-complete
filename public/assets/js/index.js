@@ -19,10 +19,14 @@ function checkRadio(value) {
         // document.getElementById("one-variable-equations").checked = true;
         // document.getElementById("multiple-variable-equations").checked = false;
         document.getElementById("price-checkout").innerHTML = 'Rs. 4900 only';
+        document.getElementById("price-checkout-input").value = 4900;
+        // return 4900;
     } else if (value == "6"){
         document.getElementById("price-checkout").innerHTML = 'Rs. 7900 only';
+        document.getElementById("price-checkout-input").value = 7900;
     }else if (value == "12"){
         document.getElementById("price-checkout").innerHTML = 'Rs. 9900 only';
+        document.getElementById("price-checkout-input").value = 9900;
     }
 }
 

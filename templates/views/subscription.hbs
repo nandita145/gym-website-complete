@@ -21,6 +21,7 @@
     <div class="sidebar">
         <a href="membership">Buy Membership</a>
         <a class="active" href="subscription">Subscriptions</a>
+        <a href="history">History</a>
         <a href="logout" >Logout</a>
         <!-- <a href="#contact">Contact</a>
         <a href="#about">About</a> -->
@@ -33,13 +34,12 @@
         <div class="membership-form">
             <div class="subscription-details">
             <h1>Subscription Details</h1>
-            <p>You have made a monthly Subscription</p>
-            
-            <p>Name: {{  }}</p>
-            <p>Phone No: 9302487</p>
-            <p>Email: 879342</p>
-            <p>Payment Amount: 490</p>
-            <p>Payment Date: 18/02/2022</p>
+            <p>You {{subscriptionActive}} {{paymentForInMonths}} Subscription</p>
+            <p>Name: {{ name }} </p>
+            <p>Phone No: {{phone}}</p>
+            <p>Email: {{ email }}</p>
+            <p>Payment Amount: {{paymentAmount}}</p>
+            <p>Payment Date: {{paymentDate}}</p>
         </div>
 
         </div>

@@ -21,6 +21,7 @@
     <div class="sidebar">
         <a class="active" href="membership">Buy Membership</a>
         <a href="subscription">Subscriptions</a>
+        <a href="history">History</a>
         <a href="logout" >Logout</a>
         <!-- <a href="#contact">Contact</a>
         <a href="#about">About</a> -->
@@ -30,23 +31,30 @@
 
       <div class="content-sub">
     <div class="container">
+        {{#if isActive }}
+        <div class="membership-form">
+<h3>You already have an active subscription</h3>
+
+<p>See <u><a href="subscription">Subscription</a></u> for more details</p>
+</div>
+        {{else}}
         <div class="membership-form">
 
-            <form action="">
+            <form action="membership" method="post">
                 <div class="user-box fadeIn second">
-                    <input type="text" name="" required="" />
+                    <input type="text" name="name" required="" />
                     <label for="">Name</label>
                 </div>
                 <div class="user-box fadeIn third">
-                    <input type="tel" name="" required="" />
+                    <input type="tel" name="phone" required="" />
                     <label for="">Phone Number</label>
                 </div>
-                <div class="user-box fadeIn third">
-                    <input type="tel" name="" required="" />
+                {{!-- <div class="user-box fadeIn third">
+                    <input type="tel" name="email" required="" value=""/>
                     <label for="">Email</label>
-                </div>
+                </div> --}}
                 <div class="user-box fadeIn third">
-                    <input type="tel" name="" required="" />
+                    <input type="tel" name="address" required="" />
                     <label for="">Address</label>
                 </div>
                 <div class="row ">
@@ -71,12 +79,13 @@
                     </div>
                 </div>
                 <div class="align-items-baseline">
-                    <p id="price-checkout"></p>
+                     <input type="hidden" id="price-checkout-input" name="amount" value=""><p id="price-checkout"></p>
                     <!-- <span id="price"></span> -->
-                    <input class="mt-4" type="checkbox" name="" id="" required>Proceed to checkout
+                    <input class="mt-4" type="checkbox" name="" id="" required="">Proceed to checkout
                 </div>
-                <button class="animated-btn fadeIn fourth">Submit</button>
+                <button class="animated-btn fadeIn fourth" >Submit</button>
             </form>
+             {{/if}}
         </div>
     </div>
     </div>

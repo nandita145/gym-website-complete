@@ -56,7 +56,7 @@ header{
     list-style: none;
   }
   
-  .nav__links .list-link {
+   .list-link {
     position: relative;
     color: var(--light);
     text-decoration: none;
@@ -64,7 +64,7 @@ header{
     /* font-size: 1.3rem; */
   }
   
-  .nav__links .list-link::after {
+  .list-link::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -75,7 +75,7 @@ header{
     transition: 0.4s ease-out;
   }
   
-  .nav__links .list-link:hover:after {
+   .list-link:hover:after {
     left: 0;
     width: 100%;
   }
@@ -1425,7 +1425,7 @@ input[type='radio'], input[type='checkbox']{
     background-color: #191919;
     border-radius: 10px;
     padding: 50px;
-    height: 100%;
+    min-height: 100vh;
 }
 
 
@@ -1503,7 +1503,7 @@ Sidebar
   div.content-sub {
     margin-left: 200px;
     padding: 1px 16px;
-    height: 100vh;
+    min-height: 100vh;
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
