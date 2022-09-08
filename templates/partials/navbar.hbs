@@ -25,7 +25,7 @@
     </nav>
     {{!-- {{ name }} --}}
 
-    {{#if isVerified}}
+    {{#if isLoggedIn}}
     
     <a href="logout" class="list-link">Logout</a>
     {{else}}
@@ -51,7 +51,7 @@
         <a class="list-link" href="contact">Contact</a>
         <a class="list-link" href="bmi">BMI Calculator</a>
         <a class="list-link" href="timetable">Timetable</a>
-    {{#if isVerified}}
+    {{#if isLoggedIn}}
 {{else}}
         <a href="login" class="cta"><button class="btn-purple">Login</button></a>
  {{/if}}

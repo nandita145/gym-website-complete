@@ -38,24 +38,24 @@ app.use(express.static(staticPath));
 
 app.get('/', (req, res)=>{
     if(req.cookies.jwt){
-        // isVerified=true
-        res.render("index",{isVerified:true}), {
+        // isLoggedIn=true
+        res.render("index",{isLoggedIn:true}), {
             pageTitle: "Hello",
             layout: false
         }
     }else{
-    res.render("index",{isVerified:false}), {
+    res.render("index",{isLoggedIn:false}), {
         pageTitle: "Hello",
         layout: false
     }}
 });
 app.get('/services', (req, res)=>{
     if(req.cookies.jwt){
-        isVerified=true
-        res.render("services",{isVerified:isVerified});
+        isLoggedIn=true
+        res.render("services",{isLoggedIn:isLoggedIn});
     }else{
-        isVerified=false
-        res.render("services",{isVerified:isVerified});
+        isLoggedIn=false
+        res.render("services",{isLoggedIn:isLoggedIn});
     }
 });
 
@@ -69,18 +69,18 @@ app.get('/services', (req, res)=>{
 app.get('/membership', auth, async(req, res)=>{
     useremail=req.user.email
     subscriptionDetails= await Membership.findOne({email: useremail}).sort({ _id: -1 });
-    // var isVerified=true;
+    // var isLoggedIn=true;
     // console.log(subscriptionDetails.name)
     if(subscriptionDetails){
         var paymentForInMonths=subscriptionDetails.paymentForInMonths;
         var paymentDate= subscriptionDetails.paymentDate;
-        console.log(paymentDate);
+        // console.log(paymentDate);
         // console.log(getDate())
-        var today = new Date();
-        console.log(today);
-        console.log(paymentForInMonths);
+        
+        // console.log(today);
+        // console.log(paymentForInMonths);
         // console.log(today-paymentDate/(1000*60*60*24));
-
+        var today = new Date();
         const start = new Date(today).getTime();
         const end = new Date(paymentDate).getTime();
         const milliseconds = Math.abs(end - start).toString()
@@ -89,28 +89,28 @@ app.get('/membership', auth, async(req, res)=>{
         const hours = parseInt(minutes / 60);
         const days = parseInt(hours / 24);
         const time = days + ":" + hours % 24 + ":" + minutes % 60 + ":" + seconds % 60;
-        console.log(days)
+        // console.log(days)
         // console.log(paymentForInMonths*30);
         var subscriptionDays=days;
         var paymentForInDays=paymentForInMonths*30;
-        // console.log(isVerified);
+        // console.log(isLoggedIn);
         // console.log( paymentDate.setDate(paymentDate.getDate() - paymentForInMonths*28))
         if (subscriptionDays<=paymentForInDays){
             
             var isActive=true;
-            // res.render("membership", {isVerified:true, subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+' month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
+            // res.render("membership", {isLoggedIn:true, subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+' month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
         }
     }
     if(req.cookies.jwt){
-        isVerified=true
+        isLoggedIn=true
         if(isActive===true){
-        res.render('membership',{isVerified:isVerified, isActive:true});
+        res.render('membership',{isLoggedIn:isLoggedIn, isActive:true});
         }else{
-            res.render('membership',{isVerified:isVerified});
+            res.render('membership',{isLoggedIn:isLoggedIn});
         }
     }else{
-        isVerified=false
-        res.render('membership',{isVerified:isVerified});
+        isLoggedIn=false
+        res.render('membership',{isLoggedIn:isLoggedIn});
     }
     
 })
@@ -118,7 +118,7 @@ app.get('/membership', auth, async(req, res)=>{
 app.post('/membership', auth, async(req, res)=>{
     try {
         useremail=req.user.email
-        // global.isVerified=true;
+        // global.isLoggedIn=true;
         const membership= new Membership({
             name: req.body.name,
             email: useremail,
@@ -145,21 +145,21 @@ app.post('/membership', auth, async(req, res)=>{
 })
 
 
-// var isVerified=false;
+// var isLoggedIn=false;
 app.get('/subscription',auth, async(req, res)=>{
     useremail=req.user.email;
     user = await Signup.findOne({email: useremail}).sort({ _id: -1 });
     subscriptionDetails= await Membership.findOne({email: useremail}).sort({ _id: -1 });
-    // var isVerified=true;
+    // var isLoggedIn=true;
     // console.log(subscriptionDetails.name)
     if(subscriptionDetails){
         var paymentForInMonths=subscriptionDetails.paymentForInMonths;
         var paymentDate= subscriptionDetails.paymentDate;
-        console.log(paymentDate);
+        // console.log(paymentDate);
         // console.log(getDate())
         var today = new Date();
-        console.log(today);
-        console.log(paymentForInMonths);
+        // console.log(today);
+        // console.log(paymentForInMonths);
         // console.log(today-paymentDate/(1000*60*60*24));
 
         const start = new Date(today).getTime();
@@ -170,34 +170,34 @@ app.get('/subscription',auth, async(req, res)=>{
         const hours = parseInt(minutes / 60);
         const days = parseInt(hours / 24);
         const time = days + ":" + hours % 24 + ":" + minutes % 60 + ":" + seconds % 60;
-        console.log(days)
+        // console.log(days)
         // console.log(paymentForInMonths*30);
         var subscriptionDays=days;
         var paymentForInDays=paymentForInMonths*30;
-        // console.log(isVerified);
+        // console.log(isLoggedIn);
         // console.log( paymentDate.setDate(paymentDate.getDate() - paymentForInMonths*28))
         if (subscriptionDays<=paymentForInDays){
             
             isActive=true;
-            res.render("subscription", {isVerified:true, subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+' month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
+            res.render("subscription", {isLoggedIn:true, subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+' month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
 
         }else{
             isActive=false;
-            res.render("subscription", {isVerified:true, subscriptionActive:'do not have a active', name: subscriptionDetails.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
+            res.render("subscription", {isLoggedIn:true, subscriptionActive:'do not have a active', name: subscriptionDetails.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
         }
     // res.render("subscription", {paymentForInMonths:subscriptionDetails.paymentForInMonths, name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
     }else{
-        res.render("subscription", {isVerified:true, subscriptionActive:'do not have a active', name: user.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
+        res.render("subscription", {isLoggedIn:true, subscriptionActive:'do not have a active', name: user.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
     }
     // return req.user;
 })
 app.get('/contact', (req, res)=>{
     if(req.cookies.jwt){
-        isVerified=true
-        res.render('contact',{isVerified:isVerified});
+        isLoggedIn=true
+        res.render('contact',{isLoggedIn:isLoggedIn});
     }else{
-        isVerified=false
-        res.render('contact',{isVerified:isVerified});
+        isLoggedIn=false
+        res.render('contact',{isLoggedIn:isLoggedIn});
     }
 });
 app.post('/contact', async (req, res)=>{
@@ -217,33 +217,33 @@ app.post('/contact', async (req, res)=>{
 
 
 app.get('/history',auth, async(req,res)=>{
-    isVerified=true
+    isLoggedIn=true
     useremail=req.user.email
     subscriptionDetails= await Membership.find({email: useremail}).sort({ _id: -1 });
-    console.log(subscriptionDetails)
-    res.render("history", {isVerified:true, subscriptionDetails});
+    // console.log(subscriptionDetails)
+    res.render("history", {isLoggedIn:true, subscriptionDetails});
     // {subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+'month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate }
     // res.render('history');
 })
 app.get('/login', (req, res)=>{
     if(req.cookies.jwt){
-        isVerified=true
-        res.render('login',{isVerified:isVerified});
+        isLoggedIn=true
+        res.render('login',{isLoggedIn:isLoggedIn});
     }else{
-        isVerified=false
-        res.render('login',{isVerified:isVerified});
+        isLoggedIn=false
+        res.render('login',{isLoggedIn:isLoggedIn});
     }
 });
 
 
 app.get('/signup', (req, res)=>{    
-if(req.cookies.jwt){
-    isVerified=true
-    res.render('signup',{isVerified:isVerified});
-}else{
-    isVerified=false
-    res.render('signup',{isVerified:isVerified});
-}
+// if(req.cookies.jwt){
+//     isLoggedIn=true
+//     res.render('signup',{isLoggedIn:isLoggedIn});
+// }else{
+    isLoggedIn=false
+    res.render('signup',{isLoggedIn:isLoggedIn});
+// }
 });
 
 app.post('/signup', async (req, res)=>{
@@ -262,8 +262,8 @@ app.post('/signup', async (req, res)=>{
             // console.log('token'+token);
             
             res.cookie('jwt', token,{
-                loggedIn:'loggedIn',
-                expires: new Date(Date.now()+30000),
+                // loggedIn:'loggedIn',
+                // expires: new Date(Date.now()+30000),
                 httpOnly: true
             })
 
@@ -272,10 +272,11 @@ app.post('/signup', async (req, res)=>{
             res.status(201).redirect('/');
 
         }else{
-            console.log('passwords do not match');
+            res.send('passwords do not match or email already exists');
+            // console.log('passwords do not match');
         }
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send('passwords do not match or email already exists '+error);
     }
 });
 app.post('/login', async (req, res)=>{
@@ -321,14 +322,14 @@ app.post('/login', async (req, res)=>{
 
 app.get('/logout', auth, (req, res)=>{
     try {
-        console.log(req.user);
+        // console.log(req.user);
         req.user.tokens=req.user.tokens.filter((currElem)=>{
             return currElem.token !== req.token;
 
         })
 
         res.clearCookie('jwt');
-        console.log('logout successful');
+        // console.log('logout successful');
         req.user.save();
         res.redirect('login');
     } catch (error) {
@@ -338,22 +339,22 @@ app.get('/logout', auth, (req, res)=>{
 
 app.get('/timetable', (req, res)=>{
     if(req.cookies.jwt){
-        isVerified=true
-        res.render('timetable',{isVerified:isVerified});
+        isLoggedIn=true
+        res.render('timetable',{isLoggedIn:isLoggedIn});
     }else{
-        isVerified=false
-        res.render('timetable',{isVerified:isVerified});
+        isLoggedIn=false
+        res.render('timetable',{isLoggedIn:isLoggedIn});
     }
 });
 
 
 app.get('/bmi', (req, res)=>{
     if(req.cookies.jwt){
-        isVerified=true
-        res.render('bmi',{isVerified:isVerified});
+        isLoggedIn=true
+        res.render('bmi',{isLoggedIn:isLoggedIn});
     }else{
-        isVerified=false
-        res.render('bmi',{isVerified:isVerified});
+        isLoggedIn=false
+        res.render('bmi',{isLoggedIn:isLoggedIn});
     }
 })
 

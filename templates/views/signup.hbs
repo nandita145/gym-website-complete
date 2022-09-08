@@ -33,14 +33,14 @@
             <label for="">Email</label>
           </div>
           <div class="user-box fadeIn second">
-            <input type="password" name="password" required />
+            <input type="password" name="password" id="pswd1" required />
             <label for="">Password</label>
           </div>
           <div class="user-box fadeIn second">
-            <input type="password" name="cpassword" required />
-            <label for="">Re-type Password</label>
+            <input type="password" name="cpassword" id="pswd2" required />
+            <label for="">Confirm Password</label>
           </div>
-          <button type="submit" class="animated-btn fadeIn fourth">Submit</button>
+          <button type="submit" onclick="matchPassword()" class="animated-btn fadeIn fourth">Submit</button>
         </form>
         <p class="center">Already have an account?<a href="login">Login Now</a></p>
       </div>
