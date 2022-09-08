@@ -97,9 +97,8 @@ app.get('/membership', auth, async(req, res)=>{
         // console.log( paymentDate.setDate(paymentDate.getDate() - paymentForInMonths*28))
         if (subscriptionDays<=paymentForInDays){
             
-            isActive=true;
+            var isActive=true;
             // res.render("membership", {isVerified:true, subscriptionActive:'have a active', paymentForInMonths:subscriptionDetails.paymentForInMonths+' month', name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
-
         }
     }
     if(req.cookies.jwt){
@@ -118,10 +117,11 @@ app.get('/membership', auth, async(req, res)=>{
 
 app.post('/membership', auth, async(req, res)=>{
     try {
-        global.isVerified=true;
+        useremail=req.user.email
+        // global.isVerified=true;
         const membership= new Membership({
             name: req.body.name,
-            // email: req.body.email,
+            email: useremail,
             phone: req.body.phone,
             address: req.body.address,
             // comment: req.body.comment,
@@ -147,7 +147,8 @@ app.post('/membership', auth, async(req, res)=>{
 
 // var isVerified=false;
 app.get('/subscription',auth, async(req, res)=>{
-    useremail=req.user.email
+    useremail=req.user.email;
+    user = await Signup.findOne({email: useremail}).sort({ _id: -1 });
     subscriptionDetails= await Membership.findOne({email: useremail}).sort({ _id: -1 });
     // var isVerified=true;
     // console.log(subscriptionDetails.name)
@@ -186,7 +187,7 @@ app.get('/subscription',auth, async(req, res)=>{
         }
     // res.render("subscription", {paymentForInMonths:subscriptionDetails.paymentForInMonths, name: subscriptionDetails.name , phone:subscriptionDetails.phone ,email: useremail, paymentAmount:subscriptionDetails.paymentAmount, paymentDate: subscriptionDetails.paymentDate });
     }else{
-        res.render("subscription", {isVerified:true, subscriptionActive:'do not have a active', name: subscriptionDetails.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
+        res.render("subscription", {isVerified:true, subscriptionActive:'do not have a active', name: user.name, email: useremail, paymentAmount:'--', paymentDate: '--' })
     }
     // return req.user;
 })
