@@ -56,7 +56,7 @@ header{
     list-style: none;
   }
   
-   .list-link {
+  .nav__links .list-link {
     position: relative;
     color: var(--light);
     text-decoration: none;
@@ -64,7 +64,7 @@ header{
     /* font-size: 1.3rem; */
   }
   
-  .list-link::after {
+  .nav__links .list-link::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -75,7 +75,7 @@ header{
     transition: 0.4s ease-out;
   }
   
-   .list-link:hover:after {
+  .nav__links .list-link:hover:after {
     left: 0;
     width: 100%;
   }
@@ -337,10 +337,17 @@ h2{
     position: relative;
     /* bottom: -86px; */
     width: 400px;
-    border-radius: 20px;
+    border-radius: 25px;
 
     /* clip-path: circle(50% at 154px 175px); */
 
+}
+
+.hero-img{
+    position: relative;
+    /* bottom: -86px; */
+    width: 400px;
+    border-radius: 25px;
 }
 .header-input-btn{
     flex: content;
@@ -380,13 +387,14 @@ h2{
 .header-content__input button {
     flex: 0.8;
     width: 100%;
+    border: none;
     min-height: 50px;
     font-family: var(--font-family);
     font-weight: 200;
     font-size: 20px;
     line-height: 27px;
     background: rgb(170,166,255);
-background: linear-gradient(228deg, rgba(170,166,255,1) 0%, rgba(40,31,245,1) 100%);
+    background: linear-gradient(228deg, rgba(170,166,255,1) 0%, rgba(40,31,245,1) 100%);
     /* border: 2px solid var(--blue); */
     padding: 0 1rem;
     color: #fff;
@@ -502,13 +510,14 @@ background: linear-gradient(228deg, rgba(170,166,255,1) 0%, rgba(40,31,245,1) 10
 }
 
 .avatar{
-    width: 80px;
+    max-width: 100%;
     border-radius: 100px;
     margin-right: 8px;
 }
 @media (max-width: 800px) {
     .avatar{
         width: 50px;
+        /* max-width: 100%; */
         border-radius: 100px;
         margin-right: 8px;
     }
@@ -1425,7 +1434,7 @@ input[type='radio'], input[type='checkbox']{
     background-color: #191919;
     border-radius: 10px;
     padding: 50px;
-    min-height: 100vh;
+    height: 100%;
 }
 
 
@@ -1503,7 +1512,7 @@ Sidebar
   div.content-sub {
     margin-left: 200px;
     padding: 1px 16px;
-    min-height: 100vh;
+    height: 100vh;
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
